@@ -1,0 +1,1 @@
+from gym_2048.envs.Game2048_env import Game2048
