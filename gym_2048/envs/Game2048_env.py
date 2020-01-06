@@ -30,6 +30,7 @@ class Game2048(gym.Env):
         self.grid = np.zeros((4, 4))
         self.done = False
         self._add_random_block()
+        return self._render()
 
     def _render(self, mode='human'):
         return np.copy(self.grid)
