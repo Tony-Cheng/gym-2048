@@ -33,7 +33,11 @@ class Game2048(gym.Env):
         return self._render()
 
     def _render(self, mode='human'):
-        return np.copy(self.grid)
+        obs_grid = np.zeros((16, 4, 4))
+        for i in range(4):
+            for j in range(4):
+                obs_grid[int(self.grid[i][j]), i, j] = 1
+        return obs_grid
 
     def render(self, mode='human'):
         new_grid = np.copy(self.grid)
@@ -180,6 +184,7 @@ class Game2048(gym.Env):
 
 if __name__ == "__main__":
     env = Game2048()
+    env.reset()
     done = False
     print(env.render())
     while not done:
@@ -192,6 +197,6 @@ if __name__ == "__main__":
             move = env.RIGHT
         elif move == 'down':
             move = env.DOWN
-        _, reward, done, _ = env.step(move)
+        state, reward, done, _ = env.step(move)
         print('reward: ', reward)
         print(env.render())
